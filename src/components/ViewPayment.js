@@ -31,7 +31,6 @@ class ViewPayment extends Component {
           paymentDescription={payment.paymentDescription}
           paymentDate = {payment.paymentDate}
           paymentStatus= {payment.paymentStatus}
-          applicationId = {payment.applicationId}
           fetchData={this.fetchData.bind(this)}
         ></Payment>
       );

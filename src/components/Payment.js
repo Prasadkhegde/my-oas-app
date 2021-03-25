@@ -6,11 +6,11 @@ import * as actions from '../actions/action';
 
 class Payment extends Component {
 
-    deletePayment(id) {
+    deletePayment(paymentId) {
       //console.log("deleting payment "  + id)
   
   
-      this.props.onDeletePayment(id)
+      this.props.onDeletePayment(paymentId)
     }
 
 
@@ -25,10 +25,9 @@ class Payment extends Component {
             <p className="card-text">Payment Description :{this.props.paymentDescription}</p>
             <p className="card-text">Payment Status      :{this.props.paymentStatus}</p>
             <p className="card-text">Payment Date        :{this.props.paymentDate}</p>
-            <p className="card-text">Application Id     :{this.props.applicationId}</p>
 
-            <button  className="btn btn-danger" onClick={this.deletePayment.bind(this,this.props.id)}>Delete</button>
-            <Link to={"/update/"+this.props.id}><button  className="btn btn-primary">Edit</button></Link>
+            <button  className="btn btn-danger" onClick={this.deletePayment.bind(this,this.props.paymentId)}>Delete</button>
+            <Link to={"/update/"+this.props.paymentId}><button  className="btn btn-primary">Edit</button></Link>
           </div>
         </div>
       )
