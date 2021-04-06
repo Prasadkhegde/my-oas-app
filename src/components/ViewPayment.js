@@ -1,24 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Payment from "./Payment.js";
-import * as actions from '../actions/action'
+import * as actions from "../actions/action";
 
 class ViewPayment extends Component {
   constructor() {
     super();
     this.state = { payments: [] };
   }
-  
-  fetchData()
-  {
 
-    console.log("fetching data.....")
+  fetchData() {
+    console.log("fetching data.....");
   }
   componentDidMount() {
-    this.props.onFetchPayments()
+    this.props.onFetchPayments();
+    document.body.style.backgroundColor = "skyblue";
   }
-
- 
 
   render() {
     var paymentsList = this.props.payments.map((payment, i) => {
@@ -29,8 +26,9 @@ class ViewPayment extends Component {
           emailId={payment.emailId}
           paymentAmount={payment.paymentAmount}
           paymentDescription={payment.paymentDescription}
-          paymentDate = {payment.paymentDate}
-          paymentStatus= {payment.paymentStatus}
+          paymentDate={payment.paymentDate}
+          paymentStatus={payment.paymentStatus}
+          // ApplicationId = {payment.applicationId}
           fetchData={this.fetchData.bind(this)}
         ></Payment>
       );
@@ -44,17 +42,16 @@ class ViewPayment extends Component {
   }
 }
 
-
-const mapStateToProps = (state) =>{
-  return{
-    payments : state.payments
-  }
-}
-
-const mapDispatchToState = (dispatch) =>{
+const mapStateToProps = (state) => {
   return {
-    onFetchPayments : () => dispatch(actions.fetchPayment())
-  }
-}
+    payments: state.payments,
+  };
+};
 
-export default connect(mapStateToProps,mapDispatchToState)(ViewPayment);
+const mapDispatchToState = (dispatch) => {
+  return {
+    onFetchPayments: () => dispatch(actions.fetchPayment()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToState)(ViewPayment);
