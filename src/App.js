@@ -1,54 +1,45 @@
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
 import "./App.css";
-import AddPayment from "./components/AddPayment";
-import UpdatePayment from "./components/UpdatePayment";
-import ViewPayment from "./components/ViewPayment";
+import Dashboard from "./components/Dashboard";
+import Login from "./components/Login";
+import PrivateRoute from "./components/PrivateRoute";
+import ForgotPassword from "./components/ForgotPassword";
+import UpdateProfile from "./components/UpdateProfile";
+import Signup from "./components/Signup";
+import Homepage from "./components/Homepage";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <>
-          <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Payment Module</Navbar.Brand>
-            <ul class="navbar-nav float-right">
-              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-              <Navbar.Collapse
-                id="responsive-navbar-nav"
-                variant="dark"
-              ></Navbar.Collapse>
-            </ul>
-            <NavDropdown title="Payment" id="collasible-nav-dropdown">
-              <Nav className="mr-auto">
-                <NavDropdown.Item href="#action/3.1" className="bg-secondary">
-                  {" "}
-                  <Link className="nav-link active" aria-current="page" to="/">
-                    View Payment
-                  </Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2" className="bg-secondary">
-                  <Link className="nav-link" to="/addpayment" variant="dark">
-                    Add Payment
-                  </Link>
-                </NavDropdown.Item>
-              </Nav>
-            </NavDropdown>
-          </Navbar>
-          <br />
-        </>
-        <Switch>
-          <Route exact path="/">
-            <ViewPayment />
-          </Route>
+    <div
+      id="bimg"
+      className="container-fluid d-flex justify-content-center align-items-center"
+      style={{
+        backgroundImage: `url("https://cdn.pixabay.com/photo/2017/12/22/08/01/literature-3033196_1280.jpg")`,
+        backgroundSize: "cover",
 
-          <Route path="/addpayment">
-            <AddPayment />
-          </Route>
-          <Route path="/update/:paymentId" component={UpdatePayment}></Route>
-        </Switch>
-      </div>
-    </Router>
+        height: "100vh",
+        objectFit: "contain",
+      }}
+    >
+      <AuthProvider>
+        <Router>
+          <Switch>
+            <PrivateRoute exact path="/" component={Login}></PrivateRoute>
+            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <PrivateRoute path="/update-profile" component={UpdateProfile} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+            <div className="navbar navbar-inverse navbar-static-top">
+              <Route path="/homepage">
+                <Homepage />
+              </Route>
+            </div>
+          </Switch>
+        </Router>
+      </AuthProvider>
+    </div>
   );
 }
 export default App;

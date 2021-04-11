@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Payment from "./Payment.js";
-import * as actions from "../actions/action";
+import * as actions from "../actions/payment";
 
 class ViewPayment extends Component {
   constructor() {
@@ -28,7 +28,7 @@ class ViewPayment extends Component {
           paymentDescription={payment.paymentDescription}
           paymentDate={payment.paymentDate}
           paymentStatus={payment.paymentStatus}
-          // ApplicationId = {payment.applicationId}
+          applicantFullName={payment.application.applicantFullName}
           fetchData={this.fetchData.bind(this)}
         ></Payment>
       );
@@ -44,7 +44,7 @@ class ViewPayment extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    payments: state.payments,
+    payments: state.payments || [],
   };
 };
 

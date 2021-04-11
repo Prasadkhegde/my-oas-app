@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from '../actions/action';
-
+import * as actions from "../actions/payment";
 
 class UpdatePayment extends Component {
   constructor() {
     super();
     this.paymentId = React.createRef();
     this.emailId = React.createRef();
+    this.applicantFullName = React.createRef();
     this.paymentAmount = React.createRef();
-    this.paymentDescription= React.createRef();
-    this.paymentStatus= React.createRef();
-    // this.applicationId = React.createRef();
-    this.state = { user : {},message: "" };
+    this.paymentDescription = React.createRef();
+    this.paymentStatus = React.createRef();
+    this.state = { user: {}, message: "" };
   }
 
   updatePayment() {
@@ -23,42 +22,36 @@ class UpdatePayment extends Component {
       emailId: this.emailId.current.value,
       paymentAmount: this.paymentAmount.current.value,
       paymentDescription: this.paymentDescription.current.value,
-      paymentStatus : this.paymentStatus.current.value,
-      // Application : {
-      //   applicationId : this.applicationId.value
-      // }
+      paymentStatus: this.paymentStatus.current.value,
+      application: {
+        applicantFullName: this.applicantFullName.current.value,
+      },
     };
 
-    this.props.onUpdatePayment(payment)
+    this.props.onUpdatePayment(payment);
   }
-  componentDidMount()
-  {
-
-    
-
-  }
-  render(){
+  componentDidMount() {}
+  render() {
     return (
       <div>
         <div className="w-50 user-form">
-        <div className="input-group mb-3">
+          <div className="input-group mb-3">
             <input
               ref={this.paymentId}
-              value = {this.props.paymentId}
+              value={this.props.paymentId}
               type="Integer"
               className="form-control"
               placeholder="paymentId"
             />
-            </div>
-            {/* <div className="input-group mb-3">
+          </div>
+          <div className="input-group mb-3">
             <input
-              ref={this.applicationId}
-              value = {this.props.applicationId}
-              type="Integer"
+              ref={this.applicantFullName}
+              type="text"
               className="form-control"
-              placeholder="applicationId"
+              placeholder="applicantFullName"
             />
-            </div> */}
+          </div>
           <div className="input-group mb-3">
             <input
               ref={this.paymentDescription}
@@ -104,20 +97,18 @@ class UpdatePayment extends Component {
       </div>
     );
   }
-  }
+}
 
-  const mapStateToProps = (state) =>{
-    return{
-      message : state.message
-    }
-  }
-  
-  const mapDispatchToState = (dispatch)=>{
-  
-    return {
-      onUpdatePayment : (payload) => dispatch(actions.EditPayment(payload))
-    }
-  
-  }
-  
-  export default connect(mapStateToProps,mapDispatchToState)(UpdatePayment)
+const mapStateToProps = (state) => {
+  return {
+    message: state.message,
+  };
+};
+
+const mapDispatchToState = (dispatch) => {
+  return {
+    onUpdatePayment: (payload) => dispatch(actions.EditPayment(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToState)(UpdatePayment);

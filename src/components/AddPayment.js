@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../actions/action";
+import * as actions from "../actions/payment";
 
 class AddPayment extends Component {
   constructor() {
     super();
     this.emailId = React.createRef();
     this.paymentAmount = React.createRef();
+    this.applicantFullName = React.createRef();
     this.paymentDescription = React.createRef();
     this.paymentDate = React.createRef();
     this.paymentStatus = React.createRef();
-    // this.applicationId = React.createRef();
     this.state = { message: "" };
   }
 
@@ -21,9 +21,9 @@ class AddPayment extends Component {
       paymentDate: this.paymentDate.current.value,
       paymentStatus: this.paymentStatus.current.value,
       emailId: this.emailId.current.value,
-      // application : {
-      //   applicationId : this.application.value,
-      // }
+      application: {
+        applicantFullName: this.applicantFullName.current.value,
+      },
     };
 
     this.props.onAddPayment(payment);
@@ -39,6 +39,14 @@ class AddPayment extends Component {
               type="text"
               className="form-control"
               placeholder="emailId"
+            />
+          </div>
+          <div className="input-group mb-3">
+            <input
+              ref={this.applicantFullName}
+              type="text"
+              className="form-control"
+              placeholder="applicantFullName"
             />
           </div>
           <div className="input-group mb-3">
