@@ -95,15 +95,7 @@ export const EditCollege = (payload) => {
         console.log(res);
         if (res.status === 200) {
           console.log("successfully updated");
-          dispatch(updateCollege(payload));
-          // .then(res => {
-          //     console.log(res)
-          //     // console.log(res.json())
-          //     if(res.status === 202){
-          //         dispatch(updateCollege("Successfully updated user !!!"));
-          //     }else {
-          //     dispatch(updateCollege("Updating user failed !!!"))
-          // }
+          dispatch(updateCollege());
         }
       }
     );

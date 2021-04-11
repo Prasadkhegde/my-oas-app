@@ -32,7 +32,7 @@ class College extends Component {
           <h5 className="card-title"> country :{this.props.country}</h5>
           <h5 className="card-title"> zipcode :{this.props.zipcode}</h5>
           <h5 className="card-title"> landmark :{this.props.landmark}</h5>
-          <Link to={"/update/" + this.props.collegeRegId}>
+          <Link to={"/updatecollege/" + this.props.collegeRegId}>
             <button className="btn btn-primary">Edit</button>
           </Link>
           <button
